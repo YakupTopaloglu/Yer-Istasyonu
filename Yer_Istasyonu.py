@@ -85,10 +85,10 @@ class MainWindow(QMainWindow):
         #Her yarım saniyede ekranda görülen parametre ve grafik durumları değişecek
 
         self.qTimer = QTimer()
-        self.qTimer.setInterval(500)
+        self.qTimer.setInterval(1000)
         self.qTimer.timeout.connect(self.getSensorValue)
-        self.qTimer.start()
         self.vehicle = self.connectMyPlane()
+        self.saniye=0
 
     #Mission planerdaki uçağın bağlanması
 
@@ -122,7 +122,8 @@ class MainWindow(QMainWindow):
         self.altitude.append(altitude)
         self.batarya.append(batarya_seviye)
 
-        self.time.append(self.qTimer.interval()*len(self.hiz))
+        self.saniye=self.saniye+1
+        self.time.append(self.saniye*len(self.hiz))
 
         self.hiz_tab.clear()
         self.hiz_tab.plot(self.time, self.hiz)
@@ -149,6 +150,7 @@ class MainWindow(QMainWindow):
 
     def arm_vehicle(self):
         self.vehicle.armed = True
+        self.qTimer.start()
 
 
 qApp = QApplication(sys.argv)
