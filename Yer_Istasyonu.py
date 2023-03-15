@@ -1,7 +1,9 @@
+
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTabWidget, QPushButton,QWidget,QLabel,QFrame
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QIcon
+from PyQt5 import QtCore
 import pyqtgraph as pg
 from dronekit import connect, VehicleMode
 import argparse
@@ -35,6 +37,7 @@ class MainWindow(QMainWindow):
 
         self.hiz_tab = pg.PlotWidget()
         self.hiz_tab.setTitle("Hız", color="w", size="10pt")
+
         centralWidget.addTab(self.hiz_tab, "Hız-Zaman")
 
         self.altitude_tab = pg.PlotWidget()
@@ -63,6 +66,10 @@ class MainWindow(QMainWindow):
         info_layout.addWidget(self.qLbLBatarya)
         self.qLbLBatarya.setStyleSheet("color:white")
 
+        self.qLblzaman=QLabel("Süre:...")
+        info_layout.addWidget(self.qLblzaman)
+        self.qLblzaman.setStyleSheet("color:white")
+
         #uçağı çalıştıracak butonun eklenmesi
 
         self.arm_button = QPushButton("Çalıştır")
@@ -88,7 +95,9 @@ class MainWindow(QMainWindow):
         self.qTimer.setInterval(1000)
         self.qTimer.timeout.connect(self.getSensorValue)
         self.vehicle = self.connectMyPlane()
-        self.saniye=0
+        self.saniye = 0
+        self.dakika=0
+        self.saniye_kalan=0
 
     #Mission planerdaki uçağın bağlanması
 
@@ -114,7 +123,7 @@ class MainWindow(QMainWindow):
         attitude = self.vehicle.attitude
         location = self.vehicle.location.global_relative_frame
         batarya_seviye = self.vehicle.battery.level
-        altitude=self.vehicle.location.global_relative_frame.alt
+        altitude = self.vehicle.location.global_relative_frame.alt
 
         #grafiklere hangisi hangi değerin grafiğiyse ona append ile ekledik
 
@@ -123,6 +132,8 @@ class MainWindow(QMainWindow):
         self.batarya.append(batarya_seviye)
 
         self.saniye=self.saniye+1
+        self.dakika=self.saniye//60
+        self.saniye_kalan=self.saniye%60
         self.time.append(self.saniye*len(self.hiz))
 
         self.hiz_tab.clear()
@@ -144,6 +155,8 @@ class MainWindow(QMainWindow):
             'Konum:{:.2f}°N, Lon:{:.2f}°S, Alt:{:.2f}'.format(location.lat, location.lon, location.alt))
         #latitude °N longitude °S (Enlem-Boylam)
         self.qLbLBatarya.setText("Batarya Durumu:{:.2f}".format(batarya_seviye))
+
+        self.qLblzaman.setText('Süre: {:02d}:{:02d}'.format(self.dakika,self.saniye_kalan ))
 
 
     #Tuşa basıldığında uçağın çalışmasına sağlayan fonksiyon
