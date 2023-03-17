@@ -1,4 +1,3 @@
-
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTabWidget, QPushButton,QWidget,QLabel,QFrame
 from PyQt5.QtCore import QTimer
@@ -7,6 +6,7 @@ from PyQt5 import QtCore
 import pyqtgraph as pg
 from dronekit import connect, VehicleMode
 import argparse
+import datetime
 
 #html colour code:#042366
 
@@ -99,6 +99,21 @@ class MainWindow(QMainWindow):
         self.dakika=0
         self.saniye_kalan=0
 
+        #dosya işlemleri için
+
+        self.file = open("hız_verileri.txt", "w")
+        self.file.write(str(datetime.datetime.now())+"\n")
+        self.file.close()
+
+        self.file = open("irtifa_verileri.txt", "w")
+        self.file.write(str(datetime.datetime.now())+"\n")
+        self.file.close()
+
+        self.file = open("batarya_verileri.txt", "w")
+        self.file.write(str(datetime.datetime.now())+"\n")
+        self.file.close()
+
+
     #Mission planerdaki uçağın bağlanması
 
     def connectMyPlane(self):
@@ -134,7 +149,7 @@ class MainWindow(QMainWindow):
         self.saniye=self.saniye+1
         self.dakika=self.saniye//60
         self.saniye_kalan=self.saniye%60
-        self.time.append(self.saniye*len(self.hiz))
+        self.time.append(self.saniye)
 
         self.hiz_tab.clear()
         self.hiz_tab.plot(self.time, self.hiz)
@@ -158,9 +173,16 @@ class MainWindow(QMainWindow):
 
         self.qLblzaman.setText('Süre: {:02d}:{:02d}'.format(self.dakika,self.saniye_kalan ))
 
+        with open("hız_verileri.txt", "a") as self.file:
+            self.file.write(str(airspeed)+",")
+
+        with open("irtifa_verileri.txt", "a") as self.file:
+            self.file.write(str(altitude)+",")
+
+        with open("batarya_verileri.txt", "a") as self.file:
+            self.file.write(str(batarya_seviye)+",")
 
     #Tuşa basıldığında uçağın çalışmasına sağlayan fonksiyon
-
     def arm_vehicle(self):
         self.vehicle.armed = True
         self.qTimer.start()
@@ -171,3 +193,4 @@ qWin = MainWindow()
 qWin.show()
 sys.exit(qApp.exec_())
 qWin.vehicle.close()
+
