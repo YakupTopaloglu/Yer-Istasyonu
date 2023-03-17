@@ -5,5 +5,5 @@
 
 ## Projenin Amacı
 Sabit kanat iha takımı BTU-LAGARİ için yapmış olduğum yer istasyonu.
-Dronekit ve pyQt5 kütüphaneleri kullanılarak yapılan Python konsol uygulamasıdır.
+Dronekit ve pyQt5 kütüphaneleri kullanılarak yapılan Python konsol uygulamasıdır. Uygulamada grafiğini zamana göre ayarladığımız parametreleri tekrardan analiz edilmek istenildiğinde kullanmak için  bir dosyada tutuyoruz.
 Amacım ilerleyen zamanlarda bu projeyi daha da geliştirip web uyguluması yapmak ve ondan sonra da Android App olacak şekilde kullanmak.
