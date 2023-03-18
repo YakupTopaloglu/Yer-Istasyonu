@@ -113,6 +113,9 @@ class MainWindow(QMainWindow):
         self.file.write(str(datetime.datetime.now())+"\n")
         self.file.close()
 
+        self.file = open("veriler.txt", "w")
+        self.file.write(str(datetime.datetime.now())+"\n")
+        self.file.close()
 
     #Mission planerdaki uçağın bağlanması
 
@@ -173,14 +176,8 @@ class MainWindow(QMainWindow):
 
         self.qLblzaman.setText('Süre: {:02d}:{:02d}'.format(self.dakika,self.saniye_kalan ))
 
-        with open("hız_verileri.txt", "a") as self.file:
-            self.file.write(str(airspeed)+",")
-
-        with open("irtifa_verileri.txt", "a") as self.file:
-            self.file.write(str(altitude)+",")
-
-        with open("batarya_verileri.txt", "a") as self.file:
-            self.file.write(str(batarya_seviye)+",")
+        with open("veriler.txt", "a") as self.file:
+            self.file.write(str(self.saniye)+" "+str(attitude.pitch)+" "+str(attitude.roll)+" "+str(attitude.yaw)+" "+str(airspeed)+" "+str(altitude)+" "+str(batarya_seviye)+"\n")
 
     #Tuşa basıldığında uçağın çalışmasına sağlayan fonksiyon
     def arm_vehicle(self):
