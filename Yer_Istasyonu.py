@@ -101,18 +101,6 @@ class MainWindow(QMainWindow):
 
         #dosya işlemleri için
 
-        self.file = open("hız_verileri.txt", "w")
-        self.file.write(str(datetime.datetime.now())+"\n")
-        self.file.close()
-
-        self.file = open("irtifa_verileri.txt", "w")
-        self.file.write(str(datetime.datetime.now())+"\n")
-        self.file.close()
-
-        self.file = open("batarya_verileri.txt", "w")
-        self.file.write(str(datetime.datetime.now())+"\n")
-        self.file.close()
-
         self.file = open("veriler.txt", "w")
         self.file.write(str(datetime.datetime.now())+"\n")
         self.file.close()
