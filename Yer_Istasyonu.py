@@ -100,14 +100,15 @@ class MainWindow(QMainWindow):
         self.saniye_kalan=0
 
         #dosya işlemleri için
-
-        self.file = open("veriler.txt", "w")
+        self.file_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".txt"
+        self.file = open(self.file_name, "w")
         self.file.write(str(datetime.datetime.now())+"\n")
         self.file.close()
 
     #Mission planerdaki uçağın bağlanması
 
     def connectMyPlane(self):
+        # simülasyonun bağlantısı
         parser = argparse.ArgumentParser(description='commands')
         parser.add_argument('--connect', default='tcp:127.0.0.1:5762')
         args = parser.parse_args()
@@ -117,9 +118,12 @@ class MainWindow(QMainWindow):
 
         vehicle = connect(connection_string, baud=baud_rate, wait_ready=True)
         vehicle.mode = VehicleMode("AUTO")
+        # raspberry'nin mission plannera bağlantısı
+        # parser.add_argument('--connect', default='/dev/ttyACM0')
 
-        #arayüzde buton olacağı için uçağı direk arm yapmamıza gerek yok istediğimiz zaman olacak
-        #vehicle.armed = True
+
+
+        # ls /dev/serial/by-id
         return vehicle
 
     def getSensorValue(self):
@@ -164,7 +168,7 @@ class MainWindow(QMainWindow):
 
         self.qLblzaman.setText('Süre: {:02d}:{:02d}'.format(self.dakika,self.saniye_kalan ))
 
-        with open("veriler.txt", "a") as self.file:
+        with open(self.file_name, "a") as self.file:
             self.file.write(str(self.saniye)+" "+str(attitude.pitch)+" "+str(attitude.roll)+" "+str(attitude.yaw)+" "+str(airspeed)+" "+str(altitude)+" "+str(batarya_seviye)+"\n")
 
     #Tuşa basıldığında uçağın çalışmasına sağlayan fonksiyon
@@ -173,9 +177,11 @@ class MainWindow(QMainWindow):
         self.qTimer.start()
 
 
+
 qApp = QApplication(sys.argv)
 qWin = MainWindow()
 qWin.show()
 sys.exit(qApp.exec_())
 qWin.vehicle.close()
+
 
