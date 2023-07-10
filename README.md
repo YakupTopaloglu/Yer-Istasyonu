@@ -3,7 +3,21 @@
 
 [Linkedin](https://www.linkedin.com/in/yakup-topaloglu-a4ab39245?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BrCEPkC0GRJWwx05SYR%2Bd4Q%3D%3D)
 
-## Projenin Amacı
-Sabit kanat iha takımı BTU-LAGARİ için yapmış olduğum yer istasyonu.
-Dronekit ve pyQt5 kütüphaneleri kullanılarak yapılan Python konsol uygulamasıdır. Uygulamada grafiğini zamana göre ayarladığımız parametreleri tekrardan analiz edilmek istenildiğinde kullanmak için  bir dosyada tutuyoruz.
-Amacım ilerleyen zamanlarda bu projeyi daha da geliştirip web uyguluması yapmak ve ondan sonra da Android App olacak şekilde kullanmak.
+# BTU-LAGARİ Yer İstasyonu
+
+BTU-LAGARİ için geliştirilmiş bir yer istasyonu yazılımıdır. Bu Python konsol uygulaması, sabit kanatlı insansız hava aracı (İHA) takımı için tasarlanmıştır ve Dronekit ve PyQt5 kütüphanelerini kullanmaktadır.
+
+## Özellikler
+
+- Uygulama, zamanla değişen parametrelerin grafiklerini ayarlamak için kullanılır.
+- Bu parametreleri analiz etmek için bir dosyada saklar, böylece istendiğinde tekrar erişilebilir olurlar.
+
+## Hedefler
+
+- Projeyi ilerleyen zamanlarda daha da geliştirmeyi hedefliyorum.
+- Bir sonraki adımda, web tabanlı bir uygulama haline getirmeyi planlıyorum.
+- En sonunda ise bir Android uygulaması olarak kullanılabilir hale getirmeyi hedefliyorum.
+
+Bu proje, BTU-LAGARİ için yer istasyonu yazılımının temel bir sürümünü içermektedir. İlerleyen zamanlarda daha fazla özellik ekleyerek, kullanımını kolaylaştıracak ve işlevselliğini artıracak güncellemeler yapmayı planlamaktayım.
+
+
