@@ -7,7 +7,7 @@ import pyqtgraph as pg
 from dronekit import connect, VehicleMode
 import argparse
 import datetime
-
+from openpyxl import Workbook,load_workbook
 #html colour code:#042366
 
 class MainWindow(QMainWindow):
@@ -104,6 +104,19 @@ class MainWindow(QMainWindow):
         self.file = open(self.file_name, "w")
         self.file.write(str(datetime.datetime.now())+"\n")
         self.file.close()
+        
+        #excel dosyası işlemleri için
+        self.wb=Workbook()
+        self.ws=self.wb.active
+        self.ws.title="DATA"
+        self.wb.save("data.xlsx")
+        self.ws["A1"]="SANİYE"
+        self.ws["B1"]="HIZ"
+        self.ws["C1"]="ALTİTUDE"
+        self.ws["D1"]="PİTCH"
+        self.ws["E1"]="ROLL"
+        self.ws["F1"]="YAW"
+        self.ws["G1"]="BATARYA SEVİYESİ"
 
     #Mission planerdaki uçağın bağlanması
 
@@ -168,9 +181,15 @@ class MainWindow(QMainWindow):
 
         self.qLblzaman.setText('Süre: {:02d}:{:02d}'.format(self.dakika,self.saniye_kalan ))
 
+        #dosya işlemi ekleme
         with open(self.file_name, "a") as self.file:
             self.file.write(str(self.saniye)+" "+str(attitude.pitch)+" "+str(attitude.roll)+" "+str(attitude.yaw)+" "+str(airspeed)+" "+str(altitude)+" "+str(batarya_seviye)+"\n")
-
+        
+        #excel işlemi ekleme
+        self.ws.append([self.saniye, airspeed, altitude, attitude.pitch, attitude.roll, attitude.yaw, batarya_seviye])
+        self.wb.save("data.xlsx")
+        self.wb.close()
+        
     #Tuşa basıldığında uçağın çalışmasına sağlayan fonksiyon
     def arm_vehicle(self):
         self.vehicle.armed = True
