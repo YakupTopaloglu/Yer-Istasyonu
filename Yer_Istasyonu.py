@@ -148,7 +148,7 @@ class MainWindow(QMainWindow):
         batarya_seviye = self.vehicle.battery.level
         altitude = self.vehicle.location.global_relative_frame.alt
 
-        #grafiklere hangisi hangi değerin grafiğiyse ona append ile ekledik
+        #grafiklere hangisi hangi değerin grafiğiyse ona ekledik
 
         self.hiz.append(airspeed)
         self.altitude.append(altitude)
