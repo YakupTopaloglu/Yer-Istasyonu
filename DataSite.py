@@ -2,7 +2,8 @@ from Data import *
 import streamlit as st
 import warnings
 import pandas as pd
-import matplotlib.pyplot as plt
+
+
 warnings.filterwarnings("ignore")
 st.set_page_config(page_title="Yer Istasyonu")
 tabs=["Veriler","Hakkimda"]
@@ -44,9 +45,15 @@ if page=="Veriler":
         battery_chart=pd.DataFrame(battery_list,second_list)
         st.line_chart(battery_chart)
         
-        st.title("Hareket Grafiği")
-        hareket_chart=pd.DataFrame(pitch_list,roll_list,yaw_list,second_list,columns=["pitch","roll","yaw"])
-        st.line_chart(speed_chart)
+        st.title("Roll Grafiği")
+        roll_chart=pd.DataFrame(roll_list,second_list)
+        st.line_chart(roll_chart)
         
+        st.title("Yaw Grafiği")
+        yaw_chart=pd.DataFrame(yaw_list,second_list)
+        st.line_chart(yaw_chart)
         
-        
+        st.title("Pitch Grafiği")
+        pitch_chart=pd.DataFrame(pitch_list,second_list)
+        st.line_chart(pitch_chart)
+
