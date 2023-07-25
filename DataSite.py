@@ -17,8 +17,8 @@ if page=="Veriler":
         st.title("Yer Istasyonu")
         st.markdown("Veriler aliniyor...")
 
-        # import subprocess
-        # subprocess.Popen(["python", "Data.py"])
+        import subprocess
+        subprocess.Popen(["python", "Data.py"])
         
         data = pd.read_excel('data.xlsx', usecols='A:G')
         st.dataframe(data)
