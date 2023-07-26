@@ -7,18 +7,18 @@ import pandas as pd
 warnings.filterwarnings("ignore")
 st.set_page_config(page_title="Yer Istasyonu")
 tabs=["Veriler","Hakkimda"]
-page=st.sidebar.radio("sekmeler",tabs)
+page=st.sidebar.radio("Sekmeler",tabs)
 
 if page=="Veriler":
-    st.markdown("<h1 style=''text-align:center;'>Hoşgeldiniz</h1>",unsafe_allow_html=True)
+    st.markdown("<h1 style=''text-align:center;'>HOŞGELDİNİZ</h1>",unsafe_allow_html=True)
     st.write("Grafik ve tabloya erişmek için lütfen butona basın")
     button=st.button("Start")
     if button==True:
         st.title("Yer Istasyonu")
         st.markdown("Veriler aliniyor...")
 
-        import subprocess
-        subprocess.Popen(["python", "Data.py"])
+        # import subprocess
+        # subprocess.Popen(["python", "Data.py"])
         
         data = pd.read_excel('data.xlsx', usecols='A:G')
         st.dataframe(data)
@@ -57,3 +57,11 @@ if page=="Veriler":
         pitch_chart=pd.DataFrame(pitch_list,second_list)
         st.line_chart(pitch_chart)
 
+elif page=="Hakkimda":
+    st.title("HAKKIMDA")
+    st.markdown("Merhaba ben **Yakup Topaloğlu**",unsafe_allow_html=False)
+    st.write("Bursa Teknik Üniversitesi 3.sınıf mekatronik mühendisiyim. Okulumuzun insansız hava aracı üreten Lagari takımında yazılım ve elektronik ekibinde bulunmaktayım.")
+    st.write("**TEKNOFEST 2023** IHA yarışmasında takımımızın çalışması olarak bu projeyi hayata geçirdik ve gururla sunuyorum. Yarışmada, takımımız performans ödülü kazanmaya hak kazandı. ")
+    st.write("Yapmış olduğum bu projenin hakkında konuşmam gerekirse de uçağın hız,irtifa,batarya durumu,yapmış olduğu hareketlerin açılarını streamlit kütüphanesi vasıtasyıla kullanıcıya güzel bir arayüz sunmak hedeflenmiştir.")
+    st.write("Umarım projemizi beğenmişsinizdir. Eğer iletişim kurmak isterseniz, benimle Linkedin üzerinden iletişime geçebilirsiniz. Teşekkür ederim!")
+    st.write("İletişim için: [Linkedin](https://www.linkedin.com/in/yakup-topaloglu-a4ab39245/)")
