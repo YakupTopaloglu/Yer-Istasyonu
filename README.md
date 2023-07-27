@@ -6,6 +6,9 @@
 # BTU-LAGARİ Yer İstasyonu
 
 BTU-LAGARİ için geliştirilmiş bir yer istasyonu yazılımıdır. Bu Python konsol uygulaması, sabit kanatlı insansız hava aracı (İHA) takımı için tasarlanmıştır ve Dronekit ve PyQt5 kütüphanelerini kullanmaktadır.
+PyQt5 ile geliştirilmiş bir yer istasyonu uygulamasını kullanıcılarla paylaşmak için Streamlit aracılığıyla bir web uygulamasına dönüştürmeyi amaçlamaktadır. Bu şekilde, uygulamanın kullanımını daha erişilebilir hale getirerek geniş bir kullanıcı kitlesine hitap etmeyi hedefliyoruz. Bu README, projenin adımlarını, gereksinimlerini ve nasıl kullanılacağına dair ayrıntılı bilgiler sunacaktır.
+
+![Streamlit Gif](https://github.com/YakupTopaloglu/Yer-Istasyonu/assets/112806251/b90e785b-08c9-4552-9e75-fe87639e9591)
 
 ## Özellikler
 
